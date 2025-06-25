@@ -1,0 +1,47 @@
+@page
+@model RazorPagesMovie.Pages.Movies.IndexModel
+
+@{
+    ViewData["Title"] = "Lista de Películas";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>@ViewData["Title"]</h2>
+    <a class="btn btn-primary" asp-page="Create">Crear Nueva Pelicula</a>
+</div>
+
+@if (Model.movie != null && Model.movie.Any())
+{
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Título</th>
+                <th>Descripción</th>
+                <th>Director</th>
+                <th>Género</th>
+                <th>Año</th>
+                <th style="width: 160px;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var movie in Model.movie)
+        {
+            <tr>
+                <td>@movie.Title</td>
+                <td>@movie.Description</td>
+                <td>@movie.Director</td>
+                <td>@movie.Gender</td>
+                <td>@movie.Year</td>
+                <td>
+                    <a class="btn btn-sm btn-outline-primary me-2" asp-page="Update" asp-route-id="@movie.Id">Editar 📝</a>
+                    <a class="btn btn-sm btn-outline-danger" asp-page="Delete" asp-route-id="@movie.Id">Borrar🗑️ </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">No hay películas registradas.</div>
+}

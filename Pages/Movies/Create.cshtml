@@ -1,0 +1,50 @@
+@page  
+@model RazorPagesMovie.Pages.Movies.CreateModel
+
+@{
+    ViewData["Title"] = "Crear una pelicula";
+}
+
+<h2 class="mb-4">@ViewData["Title"]</h2>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+
+<form method="post" class="w-100" style="max-width: 500px;">
+    <div class="mb-2">
+        <label asp-for="movie.Title" class="form-label">Titulo</label>
+        <input asp-for="movie.Title" class="form-control form-control-sm" />
+    </div>
+
+    <div class="mb-2">
+        <label asp-for="movie.Description" class="form-label">Descripción</label>
+        <textarea asp-for="movie.Description" class="form-control form-control-sm" rows="3"></textarea>
+    </div>
+
+    <div class="mb-2">
+        <label asp-for="movie.Director" class="form-label">Director</label>
+        <input asp-for="movie.Director" class="form-control form-control-sm" />
+    </div>
+
+    <div class="mb-2">
+        <label asp-for="movie.Gender" class="form-label">Genero</label>
+        <input asp-for="movie.Gender" class="form-control form-control-sm" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="movie.Year" class="form-label">Año</label>
+        <input asp-for="movie.Year" class="form-control form-control-sm" />
+    </div>
+
+    <button type="submit" class="btn btn-success btn-sm">Guardar Registro</button>
+    <a asp-page="Index" class="btn btn-secondary btn-sm ms-2">Cancelar</a>
+</form>

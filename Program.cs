@@ -1,7 +1,22 @@
+using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+using RazorPagesMovie.Model;
+using RazorPagesMovie.Validators;
+using RazorPagesMovie.DTOs;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+
+builder.Services.AddDbContext<MovieContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MovieConnection"));
+});
+
+builder.Services.AddScoped<IValidator<MovieInsert>, MovieInsertValidator>();
+builder.Services.AddScoped<IValidator<MovieUpdate>, MovieUpdateValidator>();
 
 var app = builder.Build();
 
